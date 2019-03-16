@@ -16,7 +16,7 @@ namespace Presentation.ViewModels
 		/// <summary>
 		/// The model element held
 		/// </summary>
-		protected readonly ElementBase m_element;
+		internal readonly ElementBase m_element;
 
 		public ViewModelBase(ElementBase Element)
 		{
