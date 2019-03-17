@@ -67,8 +67,8 @@ namespace ImageProfiler.ViewModels
 			PointBase p1 = new PointBase(new System.Collections.Generic.List<ElementBase> { c1 });
 			p2 = new PointBase(new System.Collections.Generic.List<ElementBase> { c1 });
 
-			p1.Point = new Mat(3, 1, MatType.CV_64FC1, new double[] { 0, 0, 1 });
-			p2.Point = new Mat(3, 1, MatType.CV_64FC1, new double[] { 512, 480, 1 });
+			p1.Point = new Mat(3, 1, MatType.CV_64FC1, new double[] { 100, 100, 1 });
+			p2.Point = new Mat(3, 1, MatType.CV_64FC1, new double[] { 200, 200, 1 });
 			LineBase line = new LineBase(new List<ElementBase>() { p1, p2 });
 
 			GrayImage img = new GrayImage(new List<ElementBase>() { c1 });
@@ -77,7 +77,7 @@ namespace ImageProfiler.ViewModels
 			PointEdge pointEdge = new PointEdge(new List<ElementBase> { img, line });
 
 			// items sequence affact ZIndex in itemsControl
-			EnvelopElements(new List<ElementBase>() { c1, p1, p2, line, pointEdge, img });
+			EnvelopElements(new List<ElementBase>() { c1, p1, p2, img });
 			CreateTimer();
 		}
 		void CreateTimer()
@@ -92,10 +92,6 @@ namespace ImageProfiler.ViewModels
 
 		private void Timer1_Elapsed(object sender, ElapsedEventArgs e)
 		{
-			var mat = new Mat(3, 1, MatType.CV_64FC1, new double[] { -10, -10, 0 });
-			p2.Point += mat;
-			var vm = this[2];
-			vm.IsSelected = true;
 		}
 
 		#endregion

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +15,7 @@ namespace Presentation.Actions
     /// As data source to let command bar binding
     /// TODO , what if other need to bind the same instance of this type? how to bind to the same reference?
     /// </summary>
-    public class ViewModelActionPanel
+    public class ViewModelActionPanel : INotifyPropertyChanged
     {
         /// <summary>
         /// Properties
@@ -32,7 +34,13 @@ namespace Presentation.Actions
         internal ActionLineFree m_lineFree = new ActionLineFree();
         internal ActionCoordinate m_coordinate = new ActionCoordinate();
 
-        public ViewModelActionPanel()
+		public event PropertyChangedEventHandler PropertyChanged;
+		protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+
+		public ViewModelActionPanel()
         {
             m_coordinate.ViewModelCreated += OnCoordinateCreated;
         }

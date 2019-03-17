@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Presentation.ViewModels;
 using Core.Derived;
 using System.Collections.ObjectModel;
+using Core.Arch;
 
 namespace Presentation.Actions
 {
@@ -26,7 +27,7 @@ namespace Presentation.Actions
         {
             return list.Count((ViewModelBase x)=> 
             {
-                return x.GetType().IsSubclassOf(typeof(ViewModelPoint));
+				return x.m_element is PointBase;
             }) >= 2;
         }
     }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ImageProfiler.UserControlCanvs"
+﻿<UserControl x:Class="ImageProfiler.Views.UserControlCanvs"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -48,7 +48,8 @@
 
 						<!--PointBase-->
 						<DataTemplate DataType="{x:Type Present:ViewModelPoint}">
-							<Path Stroke="{Binding PointType, Converter={Convertors:PointTypeToBrushValueConverter}}" Style="{StaticResource CircleMouseOverStyle}">
+							<Path Stroke="{Binding PointType, Converter={Convertors:PointTypeToBrushValueConverter}}" Style="{StaticResource CircleMouseOverStyle}"
+								  MouseDown="Shap_MouseDown">
 								<Path.Data>
 									<EllipseGeometry RadiusX="5"  RadiusY="5"
 													 Center="{Binding Location, Converter={Convertors:MatToPointValueConverter}}"/>

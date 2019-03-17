@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
+using Core.Arch;
+using ImageProfiler.RotedEventType;
+using ImageProfiler.ViewModels;
+using Presentation.Actions;
+using Presentation.ViewModels;
 namespace ImageProfiler
 {
     /// <summary>
@@ -20,9 +12,25 @@ namespace ImageProfiler
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+		private ViewModelActionPanel actionPanel =  Application.Current.TryFindResource(nameof(ViewModelActionPanel)) as ViewModelActionPanel;
+
+		public MainWindow()
         {
             InitializeComponent();
+			actionPanel.ActionLineFree.ViewModelCreated += ActionBase_ViewModelCreated;
         }
-    }
+
+		private void ActionBase_ViewModelCreated(object sender, EventArgs e)
+		{
+			var data = Canvs.DataContext as ViewModelCanvas;
+			data.Elements.Add(sender as ViewModelBase);
+		}
+
+		private void UserControlCanvs_ElementSelected(object sender, RoutedEventArgs e)
+		{
+			ViewModelBase vm = (e as ViewModelSelectedEventArgs).ViewModel;
+			
+			actionPanel.Context.SelectedViewModels.Add(vm);
+		}
+	}
 }

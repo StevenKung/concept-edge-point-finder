@@ -1,9 +1,10 @@
 ﻿using ImageProfiler.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
+using Presentation.ViewModels;
+using ImageProfiler.RotedEventType;
 
-
-
-namespace ImageProfiler
+namespace ImageProfiler.Views
 {
 	/// <summary>
 	/// UserControlCanvs.xaml 的互動邏輯
@@ -21,6 +22,28 @@ namespace ImageProfiler
 			Border.MouseMove += Border_MouseMove;
 		}
 
+		#region Custeom RoutedEvent
+
+		public static readonly RoutedEvent ViewModelSelectedEvent = EventManager.RegisterRoutedEvent(
+			nameof(ViewModelSelected),
+			RoutingStrategy.Bubble, typeof(RoutedEventHandler),
+			typeof(UserControlCanvs));
+		/// <summary>
+		/// User have selected one ViewModel in canvas
+		/// </summary>
+		public event RoutedEventHandler ViewModelSelected
+		{
+			add { AddHandler(ViewModelSelectedEvent, value); }
+			remove { RemoveHandler(ViewModelSelectedEvent, value); }
+		}
+		void RaiseElementSelectedEvent(ViewModelBase vm)
+		{
+			ViewModelSelectedEventArgs newEventArgs = new ViewModelSelectedEventArgs(ViewModelSelectedEvent, vm);
+			RaiseEvent(newEventArgs);
+		}
+
+		#endregion
+
 		private void Border_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
 		{
 			//var point = new PointF((float)Border.PrimaryX, (float)Border.PrimaryY);
@@ -28,10 +51,12 @@ namespace ImageProfiler
 			//if (obj != null) obj.isSelected = true;
 		}
 
-		private void Shape_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+		private void Shap_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			//Line obj = (Line)sender;
-			//var data = obj.DataContext;
+			var frameworkElement = e.Source as FrameworkElement;
+			var target = frameworkElement.DataContext as ViewModelBase;
+			target.IsSelected = true;
+			RaiseElementSelectedEvent(target);
 		}
 	}
 
