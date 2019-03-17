@@ -48,5 +48,10 @@ namespace Presentation.ViewModels
 		/// Greater the value of a given, the more likely the element is to appear in the foreground
 		/// </summary>
 		public int Zindex { get; set; } = 1;
+
+		/// <summary>
+		/// View is selected by mouse click
+		/// </summary>
+		public bool IsSelected { get; set; } = false;
 	}
 }

@@ -45,6 +45,11 @@ namespace ImageProfiler.ViewModels
 			}
 		}
 
+		public void EnvelopElement(ElementBase element)
+		{
+			Add(ViewModelFactory.CreateViewModel(element));
+		}
+
 		public void ForEach(Action<ViewModelBase> action)
 		{
 			foreach (var item in this)
@@ -89,6 +94,8 @@ namespace ImageProfiler.ViewModels
 		{
 			var mat = new Mat(3, 1, MatType.CV_64FC1, new double[] { -10, -10, 0 });
 			p2.Point += mat;
+			var vm = this[2];
+			vm.IsSelected = true;
 		}
 
 		#endregion
