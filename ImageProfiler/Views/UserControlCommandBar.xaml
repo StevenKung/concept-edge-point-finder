@@ -10,10 +10,21 @@
 	<UserControl.DataContext>
 		<StaticResource ResourceKey="ViewModelActionPanel"/>
 	</UserControl.DataContext>
+	
+	<UserControl.Resources>
+		<Style TargetType="{x:Type Button}">
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="Width" Value="75"/>
+			<Setter Property="Margin" Value="5,5"/>
+		</Style>
+	</UserControl.Resources>
+	
 	<StackPanel Orientation="Horizontal">
-		<Button Content="PointFree" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding ActionPointFree}" CommandParameter="{Binding Context}"/>
-		<Button Content="LineFree" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding ActionLineFree}" CommandParameter="{Binding Context}"/>
-		<Button Content="Coordinate" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Command="{Binding ActionCoordinate}" CommandParameter="{Binding Context}"/>
+		<Button Content="PointFree"  Command="{Binding ActionPointFree}" CommandParameter="{Binding Context}"/>
+		<Button Content="LineFree" Command="{Binding ActionLineFree}" CommandParameter="{Binding Context}"/>
+		<Button Content="LineFitted" Command="{Binding ActionLineFitted}" CommandParameter="{Binding Context}"/>
+		<Button Content="Coordinate" Command="{Binding ActionCoordinate}" CommandParameter="{Binding Context}"/>
 
 
 	</StackPanel>

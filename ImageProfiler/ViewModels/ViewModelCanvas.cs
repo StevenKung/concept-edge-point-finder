@@ -64,11 +64,14 @@ namespace ImageProfiler.ViewModels
 		public ElementBaseCollection()
 		{
 			CoordinateBase c1 = new CoordinateBase();
-			PointBase p1 = new PointBase(new System.Collections.Generic.List<ElementBase> { c1 });
-			p2 = new PointBase(new System.Collections.Generic.List<ElementBase> { c1 });
+			PointBase p1 = new PointBase(new List<ElementBase> { c1 });
+			p2 = new PointBase(new List<ElementBase> { c1 });
+			PointBase p3 = new PointBase(new List < ElementBase >{ c1});
 
 			p1.Point = new Mat(3, 1, MatType.CV_64FC1, new double[] { 100, 100, 1 });
 			p2.Point = new Mat(3, 1, MatType.CV_64FC1, new double[] { 200, 200, 1 });
+			p3.Point = new Mat(3, 1, MatType.CV_64FC1, new double[] { 300, 300, 1 });
+
 			LineBase line = new LineBase(new List<ElementBase>() { p1, p2 });
 
 			GrayImage img = new GrayImage(new List<ElementBase>() { c1 });
@@ -77,7 +80,7 @@ namespace ImageProfiler.ViewModels
 			PointEdge pointEdge = new PointEdge(new List<ElementBase> { img, line });
 
 			// items sequence affact ZIndex in itemsControl
-			EnvelopElements(new List<ElementBase>() { c1, p1, p2, img });
+			EnvelopElements(new List<ElementBase>() { c1, p1, p2, p3, img });
 			CreateTimer();
 		}
 		void CreateTimer()

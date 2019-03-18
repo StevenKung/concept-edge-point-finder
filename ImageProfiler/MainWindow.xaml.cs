@@ -18,6 +18,7 @@ namespace ImageProfiler
         {
             InitializeComponent();
 			actionPanel.ActionLineFree.ViewModelCreated += ActionBase_ViewModelCreated;
+			actionPanel.ActionLineFitted.ViewModelCreated += ActionBase_ViewModelCreated;
         }
 
 		private void ActionBase_ViewModelCreated(object sender, EventArgs e)

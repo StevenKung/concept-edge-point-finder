@@ -23,6 +23,7 @@ namespace Presentation.Actions
         public OrderContext Context { get => m_context; }
         public ActionPointFree ActionPointFree { get => m_pointFree; }
         public ActionLineFree ActionLineFree { get => m_lineFree; }
+		public ActionLineFitted ActionLineFitted { get => m_lineFitted; }
         public ActionCoordinate ActionCoordinate { get => m_coordinate; }
 
         internal OrderContext m_context = new OrderContext();
@@ -32,6 +33,7 @@ namespace Presentation.Actions
         /// </summary>
         internal ActionPointFree m_pointFree = new ActionPointFree();
         internal ActionLineFree m_lineFree = new ActionLineFree();
+		internal ActionLineFitted m_lineFitted = new ActionLineFitted();
         internal ActionCoordinate m_coordinate = new ActionCoordinate();
 
 		public event PropertyChangedEventHandler PropertyChanged;

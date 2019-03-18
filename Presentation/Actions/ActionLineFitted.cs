@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Linq;
 using Presentation.ViewModels;
 using Core.Derived;
 using System.Collections.ObjectModel;
+using Core.Arch;
 
 namespace Presentation.Actions
 {
     public class ActionLineFitted : ActionBase
     {
-        ActionLineFitted():base(typeof(ViewModelLineBase),typeof(LineFitted))
+        public ActionLineFitted():base(typeof(ViewModelLineBase),typeof(LineFitted))
         {
 
         }
 
         internal override bool m_canExecute(ObservableCollection<ViewModelBase> list)
         {
-            return base.m_canExecute(list);
-        }
+			return list.Count((ViewModelBase x) =>
+			{
+				return x.m_element is PointBase;
+			}) >= 2;
+		}
     }
 }
