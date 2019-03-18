@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Timers;
 using Core.Arch;
 using Core.Derived;
 using OpenCvSharp;
@@ -74,33 +73,11 @@ namespace ImageProfiler.ViewModels
 
 			LineBase line = new LineBase(new List<ElementBase>() { p1, p2 });
 
-			GrayImage img = new GrayImage(new List<ElementBase>() { c1 });
-			Cv2.CvtColor(Cv2.ImRead(@"..\..\lenna.png"), img.Image, ColorConversionCodes.BGR2GRAY);
-
-			PointEdge pointEdge = new PointEdge(new List<ElementBase> { img, line });
-
 			// items sequence affact ZIndex in itemsControl
-			EnvelopElements(new List<ElementBase>() { c1, p1, p2, p3, img });
-			CreateTimer();
-		}
-		void CreateTimer()
-		{
-			var timer1 = new Timer
-			{
-				Enabled = true,
-				Interval = 2000
-			};
-			timer1.Elapsed += Timer1_Elapsed;
-		}
-
-		private void Timer1_Elapsed(object sender, ElapsedEventArgs e)
-		{
+			EnvelopElements(new List<ElementBase>() { c1, p1, p2, p3 });
 		}
 
 		#endregion
-
-
-
 	}
 
 

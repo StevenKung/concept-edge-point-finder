@@ -25,6 +25,8 @@
 		<Button Content="LineFree" Command="{Binding ActionLineFree}" CommandParameter="{Binding Context}"/>
 		<Button Content="LineFitted" Command="{Binding ActionLineFitted}" CommandParameter="{Binding Context}"/>
 		<Button Content="Coordinate" Command="{Binding ActionCoordinate}" CommandParameter="{Binding Context}"/>
+		<Button Content="Image" Command="{Binding ActionGrayImage}" CommandParameter="{Binding Context}"/>
+		<Button Content="PointEdge"/>
 
 
 	</StackPanel>

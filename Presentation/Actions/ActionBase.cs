@@ -105,7 +105,7 @@ namespace Presentation.Actions
 			var vm = Activator.CreateInstance(m_viewModelType, element) as ViewModelBase;
 
 			//Raise event, pass new-created object to UserControlCanvus , put it on canvus
-			ViewModelCreated?.Invoke(vm, null);
+			RaiseViewModelCreated(vm);
 
 			//after used , reset
 			oc.SelectedViewModels.ToList().ForEach(x => x.IsSelected = false);
@@ -115,6 +115,10 @@ namespace Presentation.Actions
 		internal virtual bool m_canExecute(ObservableCollection<ViewModelBase> list)
 		{
 			return false;
+		}
+		protected void RaiseViewModelCreated(ViewModelBase vm)
+		{
+			ViewModelCreated?.Invoke(vm, null);
 		}
 	}
 }

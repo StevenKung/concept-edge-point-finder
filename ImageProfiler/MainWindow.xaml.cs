@@ -19,7 +19,10 @@ namespace ImageProfiler
             InitializeComponent();
 			actionPanel.ActionLineFree.ViewModelCreated += ActionBase_ViewModelCreated;
 			actionPanel.ActionLineFitted.ViewModelCreated += ActionBase_ViewModelCreated;
-        }
+			actionPanel.ActionGrayImage.ViewModelCreated += ActionBase_ViewModelCreated;
+
+			TestData();
+		}
 
 		private void ActionBase_ViewModelCreated(object sender, EventArgs e)
 		{
@@ -32,6 +35,12 @@ namespace ImageProfiler
 			ViewModelBase vm = (e as ViewModelSelectedEventArgs).ViewModel;
 			
 			actionPanel.Context.SelectedViewModels.Add(vm);
+		}
+
+		private void TestData()
+		{
+			ElementBaseCollection items = (Canvs.DataContext as ViewModelCanvas).Elements;
+			actionPanel.Context.CurrentCoordinate = items[0] as ViewModelCoordinate;
 		}
 	}
 }
