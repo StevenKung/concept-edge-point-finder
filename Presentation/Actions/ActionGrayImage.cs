@@ -6,6 +6,8 @@ using Presentation.ViewModels;
 using Core.Arch;
 using Core.Derived;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
+using System.IO;
 
 namespace Presentation.Actions
 {
@@ -48,8 +50,16 @@ namespace Presentation.Actions
 			//treat parameter as a ObservableCollection<ViewModelBase>
 			var vm = Activator.CreateInstance(m_viewModelType, element) as ViewModelBase;
 
-			//TODO , show file dialog?
-			Cv2.CvtColor(Cv2.ImRead(@"..\..\lenna.png"), element.Image, ColorConversionCodes.BGR2GRAY);
+
+			string CombinedPath = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\");
+			OpenFileDialog openFileDialog = new OpenFileDialog
+			{
+				Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*",
+				InitialDirectory = Path.GetFullPath(CombinedPath)
+			};
+			if (openFileDialog.ShowDialog() == false)
+				return;
+			Cv2.CvtColor(Cv2.ImRead(openFileDialog.FileName), element.Image, ColorConversionCodes.BGR2GRAY);
 
 			//Raise event, pass new-created object to UserControlCanvus , put it on canvus
 			RaiseViewModelCreated(vm);
