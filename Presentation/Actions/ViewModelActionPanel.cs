@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading.Tasks;
-
+using GalaSoft.MvvmLight.Messaging;
+using Presentation.Message;
 using Presentation.ViewModels;
 
 namespace Presentation.Actions
@@ -47,7 +47,13 @@ namespace Presentation.Actions
 		public ViewModelActionPanel()
         {
             m_coordinate.ViewModelCreated += OnCoordinateCreated;
-        }
+
+			m_pointFree.ViewModelCreated += ViewModelCreatedMessage;
+			m_lineFree.ViewModelCreated += ViewModelCreatedMessage;
+			m_lineFitted.ViewModelCreated += ViewModelCreatedMessage;
+			m_coordinate.ViewModelCreated += ViewModelCreatedMessage;
+			m_grayImage.ViewModelCreated += ViewModelCreatedMessage;
+		}
 
         /// <summary>
         /// 
@@ -60,5 +66,9 @@ namespace Presentation.Actions
             m_context.AvailableCoordinates.Add(coord);
             m_context.CurrentCoordinate = coord;
         }
+		private void ViewModelCreatedMessage(object sender, EventArgs e)
+		{
+			Messenger.Default.Send(new ViewModelCreatedMessage(sender as ViewModelBase));
+		}
     }
 }

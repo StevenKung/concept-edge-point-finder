@@ -7,6 +7,8 @@ using Core.Arch;
 using Core.Derived;
 using OpenCvSharp;
 using Presentation.ViewModels;
+using GalaSoft.MvvmLight.Messaging;
+using Presentation.Message;
 
 namespace ImageProfiler.ViewModels
 {
@@ -17,6 +19,16 @@ namespace ImageProfiler.ViewModels
 		/// hold all ElementBase in bag
 		/// </summary>
 		public ElementBaseCollection Elements { get; set; } = new ElementBaseCollection();
+
+		public ViewModelCanvas()
+		{
+			Messenger.Default.Register<ViewModelCreatedMessage>(this, StoreElement);
+		}
+
+		private void StoreElement(ViewModelCreatedMessage e)
+		{
+			Elements.Add(e.Sender as ViewModelBase);
+		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")

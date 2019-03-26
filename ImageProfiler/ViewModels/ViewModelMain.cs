@@ -23,9 +23,6 @@ namespace ImageProfiler.ViewModels
     /// </summary>
     public class ViewModelMain :INotifyPropertyChanged
     {
-		public RelayCommand<RoutedEventArgs> AddSelectionCommand { get; set; }
-
-
 		/// <summary>
 		/// Initializes a new instance of the MainViewModel class.
 		/// </summary>
@@ -40,24 +37,8 @@ namespace ImageProfiler.ViewModels
 			////    // Code runs "for real"
 			////}
 			///
-			AddSelectionCommand = new RelayCommand<RoutedEventArgs>(AddSelection);
-
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
-
-		/// <summary>
-		/// Use EventToCommand add selected ViewModel
-		/// TODO, may use Messenger instead?
-		/// </summary>
-		/// <param name="e"></param>
-		private void AddSelection(RoutedEventArgs e)
-		{
-			var actionPanel = SimpleIoc.Default.GetInstance<ViewModelActionPanel>();
-
-			ViewModelBase vm = (e as ViewModelSelectedEventArgs).ViewModel;
-
-			actionPanel.Context.SelectedViewModels.Add(vm);
-		}
     }
 }

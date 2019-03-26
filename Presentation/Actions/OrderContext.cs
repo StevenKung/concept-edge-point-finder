@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Core.Arch;
+using GalaSoft.MvvmLight.Messaging;
+using Presentation.Message;
 using Presentation.ViewModels;
 
 namespace Presentation.Actions
@@ -17,7 +14,7 @@ namespace Presentation.Actions
     public class OrderContext
     {
 
-        public ObservableCollection<ViewModelCoordinate> AvailableCoordinates { get => m_availableCoordinates; }
+		public ObservableCollection<ViewModelCoordinate> AvailableCoordinates { get => m_availableCoordinates; }
         public ViewModelCoordinate CurrentCoordinate
         {
             get => m_currentCoordinate;
@@ -40,5 +37,16 @@ namespace Presentation.Actions
         /// 
         /// </summary>
         internal ObservableCollection<ViewModelBase> m_selectedViewModels = new ObservableCollection<ViewModelBase>();
-    }
+
+
+		public OrderContext()
+		{
+			Messenger.Default.Register<ViewModeIsSelectedMessage>(this, StoreSelected);
+		}
+
+		private void StoreSelected(ViewModeIsSelectedMessage e)
+		{
+			m_selectedViewModels.Add(e.Sender as ViewModelBase);
+		}
+	}
 }

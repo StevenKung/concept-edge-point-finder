@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
+using GalaSoft.MvvmLight.Messaging;
+using Presentation.Message;
 using Core.Arch;
 
 namespace Presentation.ViewModels
@@ -49,9 +48,21 @@ namespace Presentation.ViewModels
 		/// </summary>
 		public int Zindex { get; set; } = 1;
 
+
+		private bool m_isSelected = false;
+
 		/// <summary>
 		/// View is selected by mouse click
 		/// </summary>
-		public bool IsSelected { get; set; } = false;
+		public bool IsSelected
+		{
+			get { return m_isSelected; }
+			set
+			{
+				m_isSelected = value;
+				if (m_isSelected)
+					Messenger.Default.Send(new ViewModeIsSelectedMessage(this));
+			}
+		}
 	}
 }

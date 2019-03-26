@@ -2,9 +2,10 @@
 using System.Windows;
 using Core.Arch;
 using GalaSoft.MvvmLight.Ioc;
-using ImageProfiler.RotedEventType;
+using GalaSoft.MvvmLight.Messaging;
 using ImageProfiler.ViewModels;
 using Presentation.Actions;
+using Presentation.Message;
 using Presentation.ViewModels;
 namespace ImageProfiler
 {
@@ -17,20 +18,11 @@ namespace ImageProfiler
 
 		public MainWindow()
         {
-
-            InitializeComponent();
+			InitializeComponent();
 			actionPanel = SimpleIoc.Default.GetInstance<ViewModelActionPanel>();
-			actionPanel.ActionLineFree.ViewModelCreated += ActionBase_ViewModelCreated;
-			actionPanel.ActionLineFitted.ViewModelCreated += ActionBase_ViewModelCreated;
-			actionPanel.ActionGrayImage.ViewModelCreated += ActionBase_ViewModelCreated;
 			TestData();
 		}
 
-		private void ActionBase_ViewModelCreated(object sender, EventArgs e)
-		{
-			var data = Canvs.DataContext as ViewModelCanvas;
-			data.Elements.Add(sender as ViewModelBase);
-		}
 		private void TestData()
 		{
 			ElementBaseCollection items = (Canvs.DataContext as ViewModelCanvas).Elements;
