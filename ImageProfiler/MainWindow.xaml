@@ -3,12 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+		xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
         xmlns:local="clr-namespace:ImageProfiler"
 		xmlns:View="clr-namespace:ImageProfiler.Views"
+		xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Platform"
         mc:Ignorable="d"
+		DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow">
     <StackPanel>
 		<View:UserControlCommandBar/>
-		<View:UserControlCanvs ViewModelSelected="UserControlCanvs_ElementSelected" x:Name="Canvs"/>
+		<View:UserControlCanvs x:Name="Canvs">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="ViewModelSelected">
+					<cmd:EventToCommand Command="{Binding Main.AddSelectionCommand, Source={StaticResource Locator}}" PassEventArgsToCommand="True"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+		</View:UserControlCanvs>
 	</StackPanel>
 </Window>

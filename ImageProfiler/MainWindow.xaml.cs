@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using Core.Arch;
+using GalaSoft.MvvmLight.Ioc;
 using ImageProfiler.RotedEventType;
 using ImageProfiler.ViewModels;
 using Presentation.Actions;
@@ -12,7 +13,7 @@ namespace ImageProfiler
     /// </summary>
     public partial class MainWindow : Window
     {
-		private ViewModelActionPanel actionPanel =  Application.Current.TryFindResource(nameof(ViewModelActionPanel)) as ViewModelActionPanel;
+		private ViewModelActionPanel actionPanel = SimpleIoc.Default.GetInstance<ViewModelActionPanel>();
 
 		public MainWindow()
         {
@@ -20,7 +21,6 @@ namespace ImageProfiler
 			actionPanel.ActionLineFree.ViewModelCreated += ActionBase_ViewModelCreated;
 			actionPanel.ActionLineFitted.ViewModelCreated += ActionBase_ViewModelCreated;
 			actionPanel.ActionGrayImage.ViewModelCreated += ActionBase_ViewModelCreated;
-
 			TestData();
 		}
 
@@ -29,14 +29,6 @@ namespace ImageProfiler
 			var data = Canvs.DataContext as ViewModelCanvas;
 			data.Elements.Add(sender as ViewModelBase);
 		}
-
-		private void UserControlCanvs_ElementSelected(object sender, RoutedEventArgs e)
-		{
-			ViewModelBase vm = (e as ViewModelSelectedEventArgs).ViewModel;
-			
-			actionPanel.Context.SelectedViewModels.Add(vm);
-		}
-
 		private void TestData()
 		{
 			ElementBaseCollection items = (Canvs.DataContext as ViewModelCanvas).Elements;
