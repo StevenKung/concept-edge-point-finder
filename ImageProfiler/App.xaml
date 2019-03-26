@@ -10,9 +10,9 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Views/Style.xaml">
-					<vm:ViewModelLocator x:Key="Locator" xmlns:vm="clr-namespace:ImageProfiler.ViewModels" />
 				</ResourceDictionary>
 			</ResourceDictionary.MergedDictionaries>
+			<vm:ViewModelLocator x:Key="Locator" xmlns:vm="clr-namespace:ImageProfiler.ViewModels" />
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

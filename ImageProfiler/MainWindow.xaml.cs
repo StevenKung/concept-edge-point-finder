@@ -13,11 +13,13 @@ namespace ImageProfiler
     /// </summary>
     public partial class MainWindow : Window
     {
-		private ViewModelActionPanel actionPanel = SimpleIoc.Default.GetInstance<ViewModelActionPanel>();
+		private ViewModelActionPanel actionPanel;
 
 		public MainWindow()
         {
+
             InitializeComponent();
+			actionPanel = SimpleIoc.Default.GetInstance<ViewModelActionPanel>();
 			actionPanel.ActionLineFree.ViewModelCreated += ActionBase_ViewModelCreated;
 			actionPanel.ActionLineFitted.ViewModelCreated += ActionBase_ViewModelCreated;
 			actionPanel.ActionGrayImage.ViewModelCreated += ActionBase_ViewModelCreated;
