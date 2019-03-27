@@ -81,16 +81,6 @@ namespace ImageProfiler.ViewModels
 			}
 		}
 
-		public List<ViewModelBase> ToList()
-		{
-			var list = new List<ViewModelBase>();
-			foreach (var item in this)
-			{
-				list.Add(item);
-			}
-			return list;
-		}
-
 		#region TestonView
 
 		PointBase p2;
