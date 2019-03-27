@@ -14,7 +14,7 @@ namespace Presentation.ViewModels
 		/// <summary>
 		/// The model as GrayImage
 		/// </summary>
-		internal GrayImage ImageElement
+		public GrayImage ImageElement
 		{
 			get { return m_element as GrayImage; }
 		}

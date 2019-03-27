@@ -9,6 +9,7 @@ using OpenCvSharp;
 using Presentation.ViewModels;
 using GalaSoft.MvvmLight.Messaging;
 using Presentation.Message;
+using System.Linq;
 
 namespace ImageProfiler.ViewModels
 {
@@ -27,6 +28,17 @@ namespace ImageProfiler.ViewModels
 
 		private void StoreElement(ViewModelCreatedMessage e)
 		{
+			if (e.Sender is ViewModelGrayImage img)
+			{
+				var reference = img.ImageElement.CoordinateReference;
+				var list = Elements.ToList();
+				var same = list.Find(vm => vm is ViewModelGrayImage && (vm as ViewModelGrayImage).ImageElement.CoordinateReference.Equals(reference));
+				if (same != null)
+				{
+					(same as ViewModelGrayImage).ImageElement.Image = img.ImageElement.Image;
+					return;
+				}
+			}
 			Elements.Add(e.Sender as ViewModelBase);
 		}
 
@@ -67,6 +79,16 @@ namespace ImageProfiler.ViewModels
 			{
 				action(item);
 			}
+		}
+
+		public List<ViewModelBase> ToList()
+		{
+			var list = new List<ViewModelBase>();
+			foreach (var item in this)
+			{
+				list.Add(item);
+			}
+			return list;
 		}
 
 		#region TestonView

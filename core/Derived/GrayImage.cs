@@ -32,5 +32,7 @@ namespace Core.Derived
             //no reference other than coordinate
             m_coordinateReference = (m_dependencies.First() as CoordinateBase).Node;
         }
-    }
+
+		public HierarchyTreeNode<CoordinateBase> CoordinateReference { get => m_coordinateReference; }
+	}
 }
