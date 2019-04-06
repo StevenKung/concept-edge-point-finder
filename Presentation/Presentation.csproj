@@ -86,6 +86,7 @@
     <Compile Include="Actions\ActionGrayImage.cs" />
     <Compile Include="Actions\ActionLineFitted.cs" />
     <Compile Include="Actions\ActionLineFree.cs" />
+    <Compile Include="Actions\ActionPointEdge.cs" />
     <Compile Include="Actions\ActionPointFree.cs" />
     <Compile Include="Actions\ActionCoordinate.cs" />
     <Compile Include="Actions\OrderContext.cs" />

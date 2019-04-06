@@ -37,7 +37,7 @@
 
 						<!--GrayImage-->
 						<DataTemplate DataType="{x:Type Present:ViewModelGrayImage}">
-							<Image Source="{Binding Bitmap}" Style="{StaticResource ImageStyle}"/>
+							<Image Source="{Binding Bitmap}" Style="{StaticResource ImageStyle}"  MouseLeftButtonDown="Shap_MouseDown"/>
 						</DataTemplate>
 						
 						<!--CoordinateBase-->
@@ -49,7 +49,7 @@
 						<!--PointBase-->
 						<DataTemplate DataType="{x:Type Present:ViewModelPoint}">
 							<Path Stroke="{Binding PointType, Converter={Convertors:PointTypeToBrushValueConverter}}" Style="{StaticResource CircleMouseOverStyle}"
-								  MouseDown="Shap_MouseDown">
+								  MouseLeftButtonDown="Shap_MouseDown">
 								<Path.Data>
 									<EllipseGeometry RadiusX="5"  RadiusY="5"
 													 Center="{Binding Location, Converter={Convertors:MatToPointValueConverter}}"/>
@@ -60,7 +60,7 @@
 						<!--LineBase-->
 						<DataTemplate DataType="{x:Type Present:ViewModelLineBase}">
 							<Line X1="{Binding X1}" Y1="{Binding Y1}" X2="{Binding X2}" Y2="{Binding Y2}"
-								  Style="{StaticResource LineMouseOverStyle}" Stroke="Red"/>
+								  Style="{StaticResource LineMouseOverStyle}" Stroke="Red" MouseLeftButtonDown="Shap_MouseDown"/>
 						</DataTemplate>
 
 					</ItemsControl.Resources>

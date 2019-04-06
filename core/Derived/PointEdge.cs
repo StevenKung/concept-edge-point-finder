@@ -31,8 +31,8 @@ namespace Core.Derived
         public PointEdge(List<ElementBase> dependencies) : base(dependencies)
         {
             //vector project to image's coordinate , then find
-            m_line = m_dependencies.Find(x => x.GetType() == typeof(LineBase)) as LineBase;
-            m_image = m_dependencies.Find(x => x.GetType() == typeof(GrayImage)) as GrayImage;
+            m_line = m_dependencies.Find(x => x is LineBase) as LineBase; //can be LineBase or derived from LineBase
+			m_image = m_dependencies.Find(x => x.GetType() == typeof(GrayImage)) as GrayImage;
             m_coordinateReference = m_line.m_coordinateReference;
             m_chain = m_coordinateReference.Value.Generate(m_image.m_coordinateReference);
 

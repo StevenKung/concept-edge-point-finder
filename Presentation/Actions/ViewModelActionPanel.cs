@@ -26,6 +26,7 @@ namespace Presentation.Actions
 		public ActionLineFitted ActionLineFitted { get => m_lineFitted; }
         public ActionCoordinate ActionCoordinate { get => m_coordinate; }
 		public ActionGrayImage ActionGrayImage { get => m_grayImage; }
+		public ActionPointEdge ActionPointEdge { get => m_pointEdge; }
 
         internal OrderContext m_context = new OrderContext();
 
@@ -37,6 +38,7 @@ namespace Presentation.Actions
 		internal ActionLineFitted m_lineFitted = new ActionLineFitted();
         internal ActionCoordinate m_coordinate = new ActionCoordinate();
 		internal ActionGrayImage m_grayImage = new ActionGrayImage();
+		internal ActionPointEdge m_pointEdge = new ActionPointEdge();
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
@@ -53,6 +55,7 @@ namespace Presentation.Actions
 			m_lineFitted.ViewModelCreated += ViewModelCreatedMessage;
 			m_coordinate.ViewModelCreated += ViewModelCreatedMessage;
 			m_grayImage.ViewModelCreated += ViewModelCreatedMessage;
+			m_pointEdge.ViewModelCreated += ViewModelCreatedMessage;
 		}
 
         /// <summary>
